@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -11,22 +9,22 @@
    <children>
       <Label text="Lottery Calculator App" />
       <Label text="How many balls?" />
-      <Spinner id="ballAmount" editable="true" />
+      <Spinner fx:id="ballAmount" editable="true" min="0" max="8" initialValue="1"/>
       <Label text="Value range for balls:" />
       <HBox alignment="CENTER" prefWidth="200.0">
          <children>
             <Label text="Min:" />
-            <Spinner fx:id="minBallValue" editable="true" />
+            <Spinner fx:id="minBallValue" editable="true" min="0" max="100" initialValue="1"/>
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutX="30.0" layoutY="184.0">
          <children>
             <Label text="Max:" />
-            <Spinner fx:id="maxBallValue" editable="true" minWidth="-Infinity" />
+            <Spinner fx:id="maxBallValue" editable="true" minWidth="-Infinity" min="0" max="100" initialValue="9"/>
          </children>
       </HBox>
-      <Button id="btnCalculate" alignment="CENTER" mnemonicParsing="false" text="Calculate" textAlignment="CENTER" />
-      <Label id="resultText" />
+      <Button fx:id="btnCalculate" alignment="CENTER" mnemonicParsing="false" text="Calculate" textAlignment="CENTER" onAction="#performCalculations" />
+      <Label fx:id="resultText" />
       <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Switch to Secondary View" />
    </children>
    <padding>
