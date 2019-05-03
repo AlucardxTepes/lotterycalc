@@ -9,7 +9,7 @@
    <children>
       <Label text="Lottery Calculator App" />
       <Label text="How many balls?" />
-      <Spinner fx:id="ballAmount" editable="true" min="0" max="8" initialValue="1"/>
+      <Spinner fx:id="ballAmount" editable="true" min="0" max="8" initialValue="5"/>
       <Label text="Value range for balls:" />
       <HBox alignment="CENTER" prefWidth="200.0">
          <children>
@@ -20,7 +20,7 @@
       <HBox alignment="CENTER" layoutX="30.0" layoutY="184.0">
          <children>
             <Label text="Max:" />
-            <Spinner fx:id="maxBallValue" editable="true" minWidth="-Infinity" min="0" max="100" initialValue="9"/>
+            <Spinner fx:id="maxBallValue" editable="true" minWidth="-Infinity" min="0" max="100" initialValue="32"/>
          </children>
       </HBox>
       <Button fx:id="btnCalculate" alignment="CENTER" mnemonicParsing="false" text="Calculate" textAlignment="CENTER" onAction="#performCalculations" />

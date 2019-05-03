@@ -9,7 +9,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -32,20 +31,26 @@ public class PrimaryController implements Initializable {
   }
 
   @FXML // Calculate button
-  public void performCalculations(ActionEvent actionEvent) {
-    int tries = (int) ballAmount.valueProperty().getValue();
-    int choices = ((Integer) maxBallValue.valueProperty().getValue()) - ((Integer) minBallValue.valueProperty().getValue()) + 1;
-    BigInteger result = calculateFactorial(choices).divide(calculateFactorial(tries).multiply(calculateFactorial(choices - tries)));
-    System.out.println(tries + ", " + choices + " = " + NumberFormat.getNumberInstance(Locale.US).format(result));
-    resultText.setText("1 : " + NumberFormat.getNumberInstance(Locale.US).format(result));
-
-    BigDecimal probability = new BigDecimal(BigInteger.ONE).divide(new BigDecimal(result), 10, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
-    resultText.setText(resultText.getText() + ". Probability: " + probability + "%");
+  public void performCalculations() {
+    BigInteger odds = calculateOdds();
+    resultText.setText("1 : " + NumberFormat.getNumberInstance(Locale.US).format(odds));
+    resultText.setText(resultText.getText() + ". Probability: " + calculateProbability(odds) + "%");
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    // Intentionally blank
+    // TODO: Remove
+    performCalculations();
+  }
+
+  private BigInteger calculateOdds() {
+    int tries = (int) ballAmount.valueProperty().getValue();
+    int choices = ((Integer) maxBallValue.valueProperty().getValue()) - ((Integer) minBallValue.valueProperty().getValue()) + 1;
+    return calculateFactorial(choices).divide(calculateFactorial(tries).multiply(calculateFactorial(choices - tries)));
+  }
+
+  private BigDecimal calculateProbability(BigInteger odds) {
+    return new BigDecimal(BigInteger.ONE).divide(new BigDecimal(odds), 10, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100)).stripTrailingZeros();
   }
 
   private BigInteger calculateFactorial(int value) {
