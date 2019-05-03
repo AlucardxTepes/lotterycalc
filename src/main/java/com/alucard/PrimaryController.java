@@ -23,7 +23,11 @@ public class PrimaryController implements Initializable {
   @FXML
   private Spinner maxBallValue;
   @FXML
-  public Label resultText;
+  private Label resultText;
+  @FXML
+  private Spinner ticketAmount;
+  @FXML
+  private Spinner ticketPrice;
 
   @FXML
   private void switchToSecondary() throws IOException {
@@ -33,7 +37,7 @@ public class PrimaryController implements Initializable {
   @FXML // Calculate button
   public void performCalculations() {
     BigInteger odds = calculateOdds();
-    resultText.setText("1 : " + NumberFormat.getNumberInstance(Locale.US).format(odds));
+    resultText.setText(ticketAmount.valueProperty().getValue() + " : " + NumberFormat.getNumberInstance(Locale.US).format(odds));
     resultText.setText(resultText.getText() + ". Probability: " + calculateProbability(odds) + "%");
   }
 
